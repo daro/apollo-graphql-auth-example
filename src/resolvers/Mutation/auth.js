@@ -15,6 +15,7 @@ export const Auth = {
       roles: ['USER'],
     };
 
+    console.log(user)
     ctx.db.users.push(user);
 
     return {
@@ -32,7 +33,7 @@ export const Auth = {
     const valid = await AuthService.checkPassword(password, user.password);
 
     if (!valid) {
-      throw new AuthenticationError('Invalid password');
+      throw new AuthenticationError('Invalid password or user name');
     }
 
     return {

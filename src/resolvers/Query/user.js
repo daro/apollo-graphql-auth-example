@@ -13,7 +13,7 @@ export const UserQuries = {
     if (!ctx.user.id) {
       throw new AuthenticationError('No user logged in');
     }
-
+    console.log(user) 
     return ctx.db.users.find(user => user.id === ctx.user.id);
   },
 };

@@ -20,7 +20,7 @@ dotenv.config()
 const app = express();
 
 
-app.use('/', (req,res) => {
+app.get('/', (req,res) => {
   res.send('dupa');
 }) 
 
@@ -44,4 +44,4 @@ const server = new ApolloServer({
 server.applyMiddleware({ app });
 
 
-app.listen({ port: process.env.PORT }, () => console.log('Server started',  process.env.PORT ));
+app.listen({ port: process.env.PORT }, "0.0.0.0" , (a,b) => console.log('Server started',  process.env.PORT,a ));

@@ -21,7 +21,7 @@ export const typeDefs = gql`
   }
 
   type Mutation {
-    signup(name: String!, email: String!, password: String!): AuthPayload!
+    signup(name: String!, email: String!, password: String!): AuthPayload
     login(email: String!, password: String!): AuthPayload!
     createNote(title: String!, text: String!): Note!
     deleteNote(id: ID!): Note!
