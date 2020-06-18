@@ -1,23 +1,36 @@
-require('dotenv').config();
-const express = require('express');
-const { ApolloServer } = require('apollo-server-express');
+import dotenv from  'dotenv';
+import { users, notes } from '../db';
+import express from 'express';
+import apolo from 'apollo-server-express';
 
-const { typeDefs } = require('./schema');
-const resolvers = require('./resolvers');
-const {
+import { typeDefs } from './schema';
+import resolvers from './resolvers';
+import  {
   LowerCaseDirective,
   IsAuthDirective,
   HasRoleDirective,
-} = require('./directives');
+} from './directives';
+import  AuthService from './services/AuthService';
 
-const AuthService = require('./services/AuthService');
-const { users, notes } = require('../db');
+const {ApolloServer} = apolo;
+
+// applay .evn  
+dotenv.config()
 
 const app = express();
 
+
+app.use('/', (req,res) => {
+  res.send('dupa');
+}) 
+
 const server = new ApolloServer({
+  introspection: true,
+  playground: true,
   typeDefs,
-  resolvers,
+  resolvers: {
+
+  },
   schemaDirectives: {
     lower: LowerCaseDirective,
     isAuth: IsAuthDirective,
@@ -25,10 +38,10 @@ const server = new ApolloServer({
   },
   context: ({ req }) => {
     const user = AuthService.getUser(req);
-
     return { user, db: { users, notes } };
   },
 });
 server.applyMiddleware({ app });
 
-app.listen({ port: process.env.PORT }, () => console.log('Server started'));
+
+app.listen({ port: process.env.PORT }, () => console.log('Server started',  process.env.PORT ));

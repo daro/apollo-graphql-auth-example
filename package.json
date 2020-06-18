@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "start": "node src/server.js",
-    "dev": "nodemon src/server.js -e js,graphql",
+    "start": "node --experimental-specifier-resolution= src/server.js",
+    "dev": "nodemon --experimental-specifier-resolution=node src/server.js -e js,graphql",
     "lint": "eslint src/server.js"
   },
   "keywords": [],

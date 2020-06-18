@@ -1,7 +1,7 @@
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
-const AuthService = {
+export default {
   getUser: req => {
     const tokenHeader = req.headers.authorization || '';
 
@@ -27,4 +27,3 @@ const AuthService = {
   getToken: data => jwt.sign(data, process.env.APP_SECRET),
 };
 
-module.exports = AuthService;

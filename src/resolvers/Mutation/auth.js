@@ -1,8 +1,9 @@
-const { AuthenticationError } = require('apollo-server-express');
+import apollo from 'apollo-server-express';
+import AuthService from '../../services/AuthService';
 
-const AuthService = require('../../services/AuthService');
+const { AuthenticationError } = apollo;
 
-const Auth = {
+export const Auth = {
   async signup(parent, { name, email, password }, ctx) {
     const hashPassword = await AuthService.getHashPassword(password);
 
@@ -40,5 +41,3 @@ const Auth = {
     };
   },
 };
-
-module.exports = { Auth };

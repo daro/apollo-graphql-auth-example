@@ -1,11 +1,13 @@
-const {
+ import apollo from 'apollo-server-express';
+ const {
   SchemaDirectiveVisitor,
   AuthenticationError,
   ForbiddenError,
-} = require('apollo-server-express');
-const { defaultFieldResolver } = require('graphql');
+} = apollo;
+import graphql from 'graphql';
+const { defaultFieldResolver } = graphql;
 
-class LowerCaseDirective extends SchemaDirectiveVisitor {
+export class LowerCaseDirective extends SchemaDirectiveVisitor {
   visitFieldDefinition(field) {
     field.resolve = async (result, args, ctx, info) => {
       if (typeof result[field.name] === 'string') {
@@ -16,7 +18,7 @@ class LowerCaseDirective extends SchemaDirectiveVisitor {
   }
 }
 
-class IsAuthDirective extends SchemaDirectiveVisitor {
+export class IsAuthDirective extends SchemaDirectiveVisitor {
   visitFieldDefinition(field) {
     field.resolve = async (result, args, ctx, info) => {
       if (!ctx.user.id) {
@@ -27,7 +29,7 @@ class IsAuthDirective extends SchemaDirectiveVisitor {
   }
 }
 
-class HasRoleDirective extends SchemaDirectiveVisitor {
+export class HasRoleDirective extends SchemaDirectiveVisitor {
   visitObject(type) {
     this.ensureFieldsWrapped(type);
     type._requiredAuthRole = this.args.role;
@@ -72,8 +74,3 @@ class HasRoleDirective extends SchemaDirectiveVisitor {
   }
 }
 
-module.exports = {
-  LowerCaseDirective,
-  IsAuthDirective,
-  HasRoleDirective,
-};

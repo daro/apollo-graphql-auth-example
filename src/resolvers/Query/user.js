@@ -1,11 +1,12 @@
-const { AuthenticationError } = require('apollo-server-express');
+import apollo from 'apollo-server-express';
+const { AuthenticationError } = apollo;
 
-const User = {
+export const User = {
   notes: (parent, args, ctx) =>
     ctx.db.notes.filter(note => note.authorId === parent.id),
 };
 
-const UserQuries = {
+export const UserQuries = {
   users: (parent, args, ctx) => ctx.db.users,
 
   me(parent, args, ctx) {
@@ -17,7 +18,3 @@ const UserQuries = {
   },
 };
 
-module.exports = {
-  User,
-  UserQuries,
-};

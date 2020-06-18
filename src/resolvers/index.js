@@ -1,11 +1,10 @@
-const { User, UserQuries } = require('./Query/user');
-const { Note, NoteQuries } = require('./Query/note');
+import { User, UserQuries } from './Query/user';
+import { Note, NoteQuries } from './Query/note';
 
-const { Auth } = require('./Mutation/auth');
+import  { Auth } from './Mutation/auth';
+import { NoteSub }  from './Subscription/note';
 
-const { NoteSub } = require('./Subscription/note');
-
-module.exports = {
+export default {
   Query: {
     ...UserQuries,
     ...NoteQuries,

@@ -1,6 +1,8 @@
-const { gql } = require('apollo-server-express');
+import apollo from 'apollo-server-express';
 
-const typeDefs = gql`
+const { gql } = apollo;
+
+export const typeDefs = gql`
   directive @lower on FIELD_DEFINITION
   directive @isAuth on FIELD_DEFINITION
   directive @hasRole(role: Role = USER) on OBJECT | FIELD_DEFINITION
@@ -53,7 +55,3 @@ const typeDefs = gql`
     author: User!
   }
 `;
-
-module.exports = {
-  typeDefs,
-};

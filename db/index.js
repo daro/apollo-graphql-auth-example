@@ -1,4 +1,4 @@
-const users = [
+export const users = [
   {
     id: 1,
     name: 'John Snow',
@@ -15,7 +15,7 @@ const users = [
   },
 ];
 
-const notes = [
+export const notes = [
   {
     id: 1,
     title: 'Note 1',
@@ -41,7 +41,3 @@ const notes = [
   },
 ];
 
-module.exports = {
-  users,
-  notes,
-};
